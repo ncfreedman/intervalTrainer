@@ -1,0 +1,69 @@
+body,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 17px;
+}
+
+p {
+  margin-top: 17px;
+}
+
+.desc {
+    max-width: 600px;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+.ui-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.desc-response {
+    text-align: center;
+}
+
+.button {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 5px;
+}
+
+#guess {
+    margin-top: 5px;
+}
+
+.label {
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.status {
+    margin-top: 5px;
+    margin-left: 2px;
+}
+
+.cross {
+    margin-top: 5px;
+    margin-left: 2px;
+    background-color: red;
+    color: white;
+}
+
+.checkmark {
+    margin-top: 5px;
+    margin-left: 2px;
+    background-color: green;
+    color: white;
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trainer</title>
+    <link rel="icon" href="wheel.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="title-container">
+        <div class="desc">
+            <h1>Random Interval Generator</h1><hr> 
+            <p>Most ear training apps I have found focus on identifying pairs of notes by selecting from a list of intervals or conventional chords by selecting from predefined chord names. I wanted to offer a more challenging ear training app featuring less common intervals and chords.</p>
+        </div>
+    </div>
+    <div class="ui-container">
+        <label for="intervalSelect">Maximum Interval</label>
+        <input type="number" class="button" id="intervalSelect" min="1" max="20" value="12" style="width:40px;">
+    </div>
+    <div class="ui-container">
+        <label for="integerSelect">Number of Intervals</label>
+        <select class="button" id="integerSelect"></select>
+    </div>
+    <div class="ui-container">
+        <button class="button" onclick="playNewIntervals()">New</button>
+        <button class="button" onclick="repeatIntervals()">Repeat</button>
+    </div>
+    <div class="desc-response">
+        <p>Guess Below!</p>
+    </div>
+    <div class="ui-container">
+        <button class="button" onclick="submitGuess()">Submit Guess</button>
+        <input type="text" style="width:80px;" id="guess">
+        <div class="status" id="status">...</div>
+    </div>
+
+    <script>
+
+        // fill the interval counter
+        const integerSelect = document.getElementById('integerSelect');
+        for (let i = 2; i <= 5; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i;
+        integerSelect.appendChild(option);
+        }
+
+        const maxIntervalSelect = document.getElementById('intervalSelect');
+        for (let i = 1; i <= 21; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i;
+        maxIntervalSelect.appendChild(option);
+        }
+        
+        const guess = document.getElementById('guess');
+        const status = document.getElementById('status');
+
+        // initialize the interval array
+        var intervalArray = [];
+        var noteIndexArray = [];
+        var selectedValue = 2;
+        var maxInterval = 12;
+
+        // Create an audio context
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        // load and play mp3
+        function loadAndPlayMP3(url) {
+            fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(buffer => {
+                    audioContext.decodeAudioData(buffer, decodedData => {
+                        const source = audioContext.createBufferSource();
+                        source.buffer = decodedData;
+                        source.connect(audioContext.destination);
+                        source.start();
+                    });
+                })
+                .catch(error => console.error('Error loading MP3:', error));
+        }
+        
+        // random note index generators
+        function getRandomNoteIndex() {
+            return Math.round(Math.random() * 87);
+        }
+
+        // random interval generators
+        function getRandomInterval() {
+            maxInterval = maxIntervalSelect.value;
+            return Math.floor(Math.random() * maxInterval) + 1;
+        }
+
+        // new intervals
+        function playNewIntervals() {
+            setTransparent();
+            let path = './grand_piano/index/'
+            var anchor = getRandomNoteIndex();
+            selectedValue = integerSelect.value;
+            noteIndexArray = [];
+            noteIndexArray.push(anchor);
+            intervalArray = [];
+            for (var i = 0; i < selectedValue - 1; i++) {
+            intervalArray.push(getRandomInterval());
+            noteIndexArray.push(anchor + intervalArray[i]);
+            anchor += intervalArray[i];
+            }
+            let arrayLength = noteIndexArray.length;
+            let maxNoteIndex = noteIndexArray[arrayLength - 1];
+            if (maxNoteIndex > 87){
+                newAnchor = Math.round(Math.random() * (87 - maxNoteIndex + noteIndexArray[0]));
+                addValue = newAnchor - noteIndexArray[0];
+                noteIndexArray = noteIndexArray.map(element => element + addValue);
+            }
+            for (var i = 0; i < selectedValue; i++) {
+            loadAndPlayMP3(path + noteIndexArray[i].toString() + '.mp3');
+            }
+        }
+
+        function submitGuess() {
+            let inputString = guess.value;
+            let numberStrings = inputString.split(',');
+            let integerArray = numberStrings.map(Number);
+            console.log(integerArray)
+            console.log(intervalArray)
+            if (arraysAreEqual(integerArray, intervalArray)){
+                setCheckmark();
+            } else {
+                setCross();
+            }
+        }
+
+        function arraysAreEqual(arr1, arr2) {
+            if (arr1.length !== arr2.length) {
+                return false;
+            }
+
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr1[i] !== arr2[i]) {
+                return false;
+                }
+            }
+            return true;
+        }
+
+        function setCross() {
+            status.className = 'cross';
+            status.innerText = '✖';
+        }
+
+        function setCheckmark() {
+            status.className = 'checkmark';
+            status.innerText = '✔';
+        }
+
+        function setTransparent() {
+            status.className = 'transparent';
+            status.innerText = '...';
+        }
+
+        // repeat
+        function repeatIntervals() {
+            console.log(noteIndexArray);
+            let path = './grand_piano/index/'
+            for (var i = 0; i < selectedValue; i++) {
+            loadAndPlayMP3(path + noteIndexArray[i].toString() + '.mp3');
+            }
+        }
+
+        // stop audio
+        function stopAll() {
+            audioContext.suspend();
+            setTimeout(() => {
+                audioContext.resume();
+            }, 100);
+        }
+    </script>
+
+</body>
+</html>
