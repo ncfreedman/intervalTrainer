@@ -5,7 +5,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", -apple-system, BlinkMacSystemFo
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 50vh;
+    height: 270px;
+    width: 650px;
     text-align: center;
 }
 
@@ -23,35 +24,60 @@ p {
     line-height: 1.5;
 }
 
+.box {
+    border: 2px solid #333;
+    border-radius: 12px;
+    width: 240px
+}
+
 .ui-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: justify;
+}
+
+.settings-container {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.playback-container {
+    width: 162px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .desc-response {
     text-align: center;
+    height: 25px;
+    font-size: 16px;
 }
 
 .button {
     margin-left: 3px;
     margin-right: 3px;
     margin-top: 5px;
+    font-size: 13px;
 }
 
 #guess {
     margin-top: 5px;
+    font-size: 13px;
 }
 
 .label {
     margin-right: 5px;
     margin-top: 5px;
+    font-size: 15px;
 }
 
 .status {
     margin-top: 5px;
     margin-left: 2px;
+    width: 30px;
+    text-align:center;
 }
 
 .cross {
@@ -59,6 +85,8 @@ p {
     margin-left: 2px;
     background-color: red;
     color: white;
+    width: 30px;
+    text-align:center;
 }
 
 .checkmark {
@@ -66,4 +94,27 @@ p {
     margin-left: 2px;
     background-color: green;
     color: white;
+    width: 30px;
+    text-align:center;
+}
+
+.transparent {
+    margin-top: 5px;
+    margin-left: 2px;
+    width: 30px;
+    text-align:center;
+}
+
+.answer-container {
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.answer {
+    margin-top: 5px;
+    margin-left: 2px;
+    width: 95px;
+    text-align:center;
+    font-size: 10px;
 }

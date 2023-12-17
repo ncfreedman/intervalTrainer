@@ -12,33 +12,38 @@
 </head>
 
 <body>
-    <div class="title-container">
-        <div class="desc">
-            <h1>Random Interval Generator</h1><hr> 
-            <p>Most ear training apps I have found focus on identifying pairs of notes by selecting from a list of intervals or conventional chords by selecting from predefined chord names. I wanted to offer a more challenging ear training app featuring less common intervals and chords.</p>
+    <div class="ui-container">
+        <div class="title-container">
+            <div class="desc">
+                <div style="text-align:center;"><h1>Interval Trainer</h1></div><hr> 
+                <p>Most ear training apps I have found focus on identifying pairs of notes by selecting from a list of intervals or conventional chords by selecting from predefined chord names. I wanted to offer a more challenging ear training app featuring less common intervals and chords. Below, you can select the maximum interval in half-steps and the total number of intervals per chord. Play the chord and repeat if you would like. Submit your guess by specifying each interval in half-steps separated by a comma.</p>
+            </div>
         </div>
     </div>
-    <div class="ui-container">
-        <label for="intervalSelect">Maximum Interval</label>
-        <input type="number" class="button" id="intervalSelect" min="1" max="20" value="12" style="width:40px;">
-    </div>
-    <div class="ui-container">
-        <label for="integerSelect">Number of Intervals</label>
-        <select class="button" id="integerSelect"></select>
-    </div>
-    <div class="ui-container">
-        <button class="button" onclick="playNewIntervals()">New</button>
-        <button class="button" onclick="repeatIntervals()">Repeat</button>
-    </div>
-    <div class="desc-response">
-        <p>Guess Below!</p>
-    </div>
-    <div class="ui-container">
-        <button class="button" onclick="submitGuess()">Submit Guess</button>
-        <input type="text" style="width:80px;" id="guess">
-        <div class="status" id="status">...</div>
-    </div>
-
+    <div class="ui-container"><div class="box"><br>
+        <div class="ui-container"><div class="settings-container">
+            <label class="label" for="intervalSelect">Maximum Interval:</label>
+            <select class="button" id="intervalSelect" style="width:40px;"></select>
+        </div></div>
+        <div class="ui-container"><div class="settings-container">
+            <label class="label" for="integerSelect">Number of Intervals:</label>
+            <select class="button" id="integerSelect" style="width:40px;"></select>
+        </div></div><br>
+        <div class="ui-container"><div class="playback-container">
+            <button class="button" onclick="playNewIntervals()">New Chord</button>
+            <button class="button" onclick="repeatIntervals()">Play Again</button>
+        </div></div>
+        <div class="desc-response"><p>Guess Below</p></div>
+        <div class="ui-container"><div class="settings-container">
+            <button class="button" onclick="submitGuess()">Submit Guess</button>
+            <input type="text" style="width:60px;text-align:center;" id="guess">
+            <div class="status" id="status">...</div>
+        </div></div>
+        <div class="ui-container"><div class="answer-container">
+            <button class="button" onclick="revealAnswer()">Reveal</button>
+            <div class="answer" id="answer"></div>
+        </div></div><br>
+    </div></div>
     <script>
 
         // fill the interval counter
@@ -60,12 +65,15 @@
         
         const guess = document.getElementById('guess');
         const status = document.getElementById('status');
+        const answer = document.getElementById('answer');
 
         // initialize the interval array
         var intervalArray = [];
         var noteIndexArray = [];
         var selectedValue = 2;
+        integerSelect.value = selectedValue;
         var maxInterval = 12;
+        maxIntervalSelect.value = maxInterval;
 
         // Create an audio context
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -126,13 +134,15 @@
             let inputString = guess.value;
             let numberStrings = inputString.split(',');
             let integerArray = numberStrings.map(Number);
-            console.log(integerArray)
-            console.log(intervalArray)
             if (arraysAreEqual(integerArray, intervalArray)){
                 setCheckmark();
             } else {
                 setCross();
             }
+        }
+
+        function revealAnswer() {
+            answer.innerText = intervalArray.join(',');
         }
 
         function arraysAreEqual(arr1, arr2) {
