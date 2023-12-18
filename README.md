@@ -1,2 +1,2 @@
 # intervalTrainer
-train your ability to recognize arbitary chords by ear
+practice arbitrary chord recognition by ear
