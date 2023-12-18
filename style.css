@@ -1,4 +1,11 @@
-body,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;}
+:root {
+    --main-color: #0b3a2f;
+}
+
+body,h1,h2,h3,h4,h5,h6 {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    color: var(--main-color);
+}
 
 .title-container {
     display: flex;
@@ -6,12 +13,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", -apple-system, BlinkMacSystemFo
     align-items: center;
     justify-content: center;
     height: 270px;
-    width: 650px;
+    width: 800px;
     text-align: center;
 }
 
 h1 {
     margin-bottom: 17px;
+}
+
+hr {
+    background-color: var(--main-color);
+    height:1.2px;
 }
 
 p {
@@ -25,7 +37,7 @@ p {
 }
 
 .box {
-    border: 2px solid #333;
+    border: 2px solid var(--main-color);
     border-radius: 12px;
     width: 240px
 }
@@ -60,11 +72,15 @@ p {
     margin-right: 3px;
     margin-top: 5px;
     font-size: 13px;
+    color: var(--main-color);
 }
 
 #guess {
+    text-align:center;
     margin-top: 5px;
+    width:60px;
     font-size: 13px;
+    color: var(--main-color);
 }
 
 .label {
@@ -116,5 +132,6 @@ p {
     margin-left: 2px;
     width: 95px;
     text-align:center;
-    font-size: 10px;
+    font-size: 15px;
+    color: var(--main-color);
 }

@@ -15,8 +15,8 @@
     <div class="ui-container">
         <div class="title-container">
             <div class="desc">
-                <div style="text-align:center;"><h1>Interval Trainer</h1></div><hr> 
-                <p>Most ear training apps I have found focus on identifying pairs of notes by selecting from a list of intervals or conventional chords by selecting from predefined chord names. I wanted to offer a more challenging ear training app featuring less common intervals and chords. Below, you can select the maximum interval in half-steps and the total number of intervals per chord. Play the chord and repeat if you would like. Submit your guess by specifying each interval in half-steps separated by a comma.</p>
+                <div style="text-align:center;"><h1>Interval Trainer</h1></div><hr>
+                <p>Most ear training apps I have found test recognition single intervals or conventional chord voicings. Here is a more general and challenging interval trainer, featuring unconventional intervals and chords. Below, you can specify an upper bound on interval length and the total number of intervals, then generate a random chord. To test your recognition, guess the chord by writing the intervals in ascending order as number of half-steps separated by commas (e.g. 3,4 = minor triad).</p>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
         <div class="desc-response"><p>Guess Below</p></div>
         <div class="ui-container"><div class="settings-container">
             <button class="button" onclick="submitGuess()">Submit Guess</button>
-            <input type="text" style="width:60px;text-align:center;" id="guess">
+            <input type="text" class="guess" id="guess">
             <div class="status" id="status">...</div>
         </div></div>
         <div class="ui-container"><div class="answer-container">
