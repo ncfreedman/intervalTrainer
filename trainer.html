@@ -11,21 +11,17 @@
 </head>
 
 <body>
-    <div class="ui-container">
-        <div class="title-container">
-            <div class="desc">
-                <div style="text-align:center;">
-                    <h1>Interval Trainer</h1>
-                </div>
-                <hr>
-                <p>Most ear training apps I've found test recognition of single intervals or conventional chord
-                    voicings. Here is a more general and potentially challenging interval trainer which randomly
-                    compiles chords using a specified number of intervals and maximum interval length. Guess the chord
-                    by writing the intervals in <sup>1</sup>&frasl;<sub>2</sub> steps in ascending order separated by
-                    commas (e.g. 3,4 = minor triad).</p>
-            </div>
+    <div class="ui-container"><div class="title-container"><div class="desc">
+        <div style="text-align:center;">
+            <h1>Interval Trainer</h1>
         </div>
-    </div>
+        <hr>
+        <p>Most ear training apps I've found test recognition of single intervals or conventional chord
+            voicings. Here is a more general and potentially challenging interval trainer which randomly
+            compiles chords using a specified number of intervals and maximum interval length. Guess the chord
+            by writing the intervals in <sup>1</sup>&frasl;<sub>2</sub> steps in ascending order separated by
+            commas (e.g. 3,4 = minor triad).</p>
+    </div></div></div>
     <div class="ui-container">
         <div class="box">
             <div class="inner-container">
@@ -140,6 +136,7 @@
                 addValue = newAnchor - noteIndexArray[0];
                 noteIndexArray = noteIndexArray.map(element => element + addValue);
             }
+            console.log(noteIndexArray)
             for (var i = 0; i < selectedValue; i++) {
                 loadAndPlayMP3(path + noteIndexArray[i].toString() + '.mp3');
             }
